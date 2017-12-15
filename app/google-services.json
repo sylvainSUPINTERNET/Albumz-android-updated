@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "283967075347",
+    "firebase_url": "https://albumzlast.firebaseio.com",
+    "project_id": "albumzlast",
+    "storage_bucket": "albumzlast.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:283967075347:android:f70bdeea1ab38e48",
+        "android_client_info": {
+          "package_name": "com.example.sylvain.albumz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "283967075347-4pjj1dcvi6h7u4iuguuo6bv3nkr6cdna.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-OnG38QSG8j-62_obaycXfWnI1SD8tME"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

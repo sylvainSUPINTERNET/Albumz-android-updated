@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_account"
+            android:icon="@drawable/ic_account_circle"
+            android:title="Sign Up / Sign In" />
+    </group>
+
+    <item android:title="Picture management">
+        <menu>
+            <item
+                android:id="@+id/nav_camera"
+                android:icon="@drawable/ic_add_a_photo"
+                android:title="Import" />
+        </menu>
+    </item>
+
+    <item android:title="Album management">
+        <menu>
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/ic_add_to_photos"
+                android:title="Create Album" />
+            <item
+                android:id="@+id/nav_gallery"
+                android:icon="@drawable/ic_folder"
+                android:title="My Albumz" />
+        </menu>
+    </item>
+
+</menu>
