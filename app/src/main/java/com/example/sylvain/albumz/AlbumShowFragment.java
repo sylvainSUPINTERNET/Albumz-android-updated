@@ -2,6 +2,7 @@ package com.example.sylvain.albumz;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,8 @@ public class AlbumShowFragment extends Fragment {
 
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
         final String albumName = getArguments().getString("albumName");
+
+        Log.d("albumname", albumName);
 
         DatabaseReference ref = database.child("albumz").child(albumName);
 
@@ -65,7 +68,7 @@ public class AlbumShowFragment extends Fragment {
                                           for (DataSnapshot item : dataSnapshot.getChildren()) {
                                               if (item.getKey().equals(albumName)) {
                                                   Album album = dataSnapshot.getValue(Album.class);
-                                                  view.findViewById(R.id.albumNameShow);
+                                                  //view.findViewById(R.id.albumNameShow);
                                               }
 
                                           }

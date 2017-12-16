@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,8 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -44,9 +48,8 @@ public class UploadFragment extends Fragment implements View.OnClickListener {
 
     private Uri selectedImageUri;
 
-    // For search when name album is posted with upload if we find on private or public its fine, else if both true => Toast 0 album found
-    Boolean privateError = false;
-    Boolean publicError = false;
+    //"compteur derreur" passt true if on find minimum UN album public ou private
+    Boolean albumFound = false;
 
     //UI creation
     EditText albumName;
@@ -161,15 +164,15 @@ public class UploadFragment extends Fragment implements View.OnClickListener {
                                         //todo add picture
                                         //Log.d("PRIVATE FOUND", "found ! todo add picture node");
                                         //Log.d("key data",data.getKey().toString());
+                                        albumFound = true;
                                         refPrivate.child(data.getKey()).child("pictures").push().setValue(key + "jpg"); //last key correspond to image name
-                                        return;
-                                    }else{
-                                        privateError = true;
+                                        albumName.setText(""); //refresh field name to avoid loop
                                     }
                                 }
                             }
                             @Override
                             public void onCancelled(DatabaseError databaseError) {
+                                Log.d("DB ERROR", databaseError.getMessage());
                             }
                         });
 
@@ -184,27 +187,39 @@ public class UploadFragment extends Fragment implements View.OnClickListener {
                                         //todo add picture
                                         //Log.d("PUBLIC FOUND", "found ! todo add picture node");
                                         //Log.d("key data",data.getKey().toString());
+                                        albumFound = true;
                                         refPublic.child(data.getKey()).child("pictures").push().setValue(key + "jpg"); //last key correspond to image name
-                                        return;
-                                    }else{
-                                        publicError = true;
+                                        albumName.setText(""); //refresh field name to avoid loop
                                     }
                                 }
                             }
                             @Override
                             public void onCancelled(DatabaseError databaseError) {
+                                Log.d("DB ERROR", databaseError.getMessage());
                             }
                         });
 
+                        Log.d("error upload", albumFound.toString());
+                        //TODO: corriger le bug erreur (no albums) s'affiche (se set une fois qui a success mais jamais ne revient et aussi le code sexecute avant le code donc erreur au debut a chaque fois
+                        //todo : clear picture de ImageView une fois que l'upload s'est fait avec success
+
                         //if both error === false we push image name into child pictures (private or public album correspond) ELSE return toast Error no album found
-                        if(!privateError || !publicError){
-                            uploadTask = imageRef.putStream(getActivity().getContentResolver().openInputStream(selectedImageUri));
-                        }else{
-                            CharSequence text = "No albums found ";
-                            int duration = Toast.LENGTH_SHORT;
-                            Toast toast = Toast.makeText(getContext(), text, duration);
-                            toast.show();
-                        }
+
+                        uploadTask = imageRef.putStream(getActivity().getContentResolver().openInputStream(selectedImageUri));
+                        uploadTask.addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception exception) {
+                                // Handle unsuccessful uploads
+                                Log.d("uploadStatus", exception.getMessage());
+                            }
+                        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
+                                Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                                Log.d("uploadStatus", "success");
+                            }
+                        });
 
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();

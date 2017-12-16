@@ -10,16 +10,16 @@
             android:title="Sign Up / Sign In" />
     </group>
 
-    <item android:title="Picture management">
+    <item android:title="Picture">
         <menu>
             <item
                 android:id="@+id/nav_camera"
                 android:icon="@drawable/ic_add_a_photo"
-                android:title="Import" />
+                android:title="Upload picture" />
         </menu>
     </item>
 
-    <item android:title="Album management">
+    <item android:title="Album">
         <menu>
             <item
                 android:id="@+id/nav_send"

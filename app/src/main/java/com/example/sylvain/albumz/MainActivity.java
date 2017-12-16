@@ -144,7 +144,7 @@ public class MainActivity extends FragmentActivity implements NavigationView.OnN
             } else {
                 redirectLogin();
             }
-       
+
         } else if (id == R.id.nav_send) {
             if (currentUser != null)
             {
