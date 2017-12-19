@@ -144,7 +144,7 @@ public class UploadFragment extends Fragment implements View.OnClickListener {
 
 
                         final DatabaseReference refPrivate = database.child("albumz").child("private").child(currentUser.getUid()); //current users private albums
-                        final DatabaseReference refPublic = database.child("albumz").child("public").child(currentUser.getUid()); //current users private albums
+                        final DatabaseReference refPublic = database.child("albumz").child("public").child(albumName.getText().toString()); //current users private albums
 
                                 //Log.d("PRIVATE ALBUM => ", refPrivate.toString());
 
@@ -182,13 +182,13 @@ public class UploadFragment extends Fragment implements View.OnClickListener {
                                 for (DataSnapshot data: snapshot.getChildren()) { // child == album
                                    // Log.d("childValue",data.child("albumName").getValue(String.class));
 
-                                    if(albumName.getText().toString().equals(data.child("albumName").getValue(String.class))){
+                                    if(albumName.getText().toString().equals(data.getValue(String.class))){
                                         //public found
                                         //todo add picture
                                         //Log.d("PUBLIC FOUND", "found ! todo add picture node");
                                         //Log.d("key data",data.getKey().toString());
                                         albumFound = true;
-                                        refPublic.child(data.getKey()).child("pictures").push().setValue(key + "jpg"); //last key correspond to image name
+                                        refPublic.child("pictures").push().setValue(key + ".jpg"); //last key correspond to image name
                                         albumName.setText(""); //refresh field name to avoid loop
                                     }
                                 }

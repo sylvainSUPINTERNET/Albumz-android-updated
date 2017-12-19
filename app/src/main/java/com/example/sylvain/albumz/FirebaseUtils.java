@@ -72,7 +72,8 @@ public class FirebaseUtils {
         FirebaseDatabase.getInstance().getReference("albumz/public").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                listener.onAlbumzAdded(dataSnapshot.getValue(Album.class));
+                Album value = dataSnapshot.getValue(Album.class);
+                listener.onAlbumzAdded(value);
             }
 
             @Override

@@ -22,6 +22,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * Created by michaelguerfi on 21/11/2017.
@@ -112,7 +113,7 @@ public class AlbumCreationFragment extends Fragment implements View.OnClickListe
                 } else {
 
                     Album album = new Album(albumName.getText().toString(), userConnected, publicSwitch.isChecked());
-                    String noeud = album.random();
+                    UUID uniqueKey = UUID.randomUUID();
 
                     if (publicSwitch.isChecked()){
                         //public
@@ -120,9 +121,10 @@ public class AlbumCreationFragment extends Fragment implements View.OnClickListe
                         //albumz -> public -> album
 
                         storageRef.child(album.getAlbumName());
-                        mDatabase.child("albumz").child("public").child(currentUser.getUid()).child(noeud).child("albumName").setValue(album.getAlbumName());
-                        mDatabase.child("albumz").child("public").child(currentUser.getUid()).child(noeud).child("user").setValue(userConnected);
-                        mDatabase.child("albumz").child("public").child(currentUser.getUid()).child(noeud).child("publicAlbum").setValue(album.isPublicAlbum());
+                        DatabaseReference albumCreated = mDatabase.child("albumz").child("public").child(album.getAlbumName());
+                        albumCreated.child("albumName").setValue(album.getAlbumName());
+                        albumCreated.child("user").setValue(userConnected);
+                        albumCreated.child("publicAlbum").setValue(album.isPublicAlbum());
 
                     } else{
                         //private
@@ -130,9 +132,9 @@ public class AlbumCreationFragment extends Fragment implements View.OnClickListe
                         // albumz -> private -> user -> album
 
                         storageRef.child(album.getAlbumName());
-                        mDatabase.child("albumz").child("private").child(currentUser.getUid()).child(noeud).child("albumName").setValue(album.getAlbumName());
-                        mDatabase.child("albumz").child("private").child(currentUser.getUid()).child(noeud).child("user").setValue(userConnected);
-                        mDatabase.child("albumz").child("private").child(currentUser.getUid()).child(noeud).child("publicAlbum").setValue(album.isPublicAlbum());
+                        mDatabase.child("albumz").child("private").child(currentUser.getUid()).child(album.getAlbumName()).child("albumName").setValue(album.getAlbumName());
+                        mDatabase.child("albumz").child("private").child(currentUser.getUid()).child(album.getAlbumName()).child("user").setValue(userConnected);
+                        mDatabase.child("albumz").child("private").child(currentUser.getUid()).child(album.getAlbumName()).child("publicAlbum").setValue(album.isPublicAlbum());
 
                         /*
                         mDatabase.child("albumz").child(noeud).child("albumName").setValue(album.getAlbumName());

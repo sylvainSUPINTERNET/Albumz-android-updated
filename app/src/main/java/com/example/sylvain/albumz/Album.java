@@ -17,6 +17,7 @@ public class Album {
     protected User user;
     protected boolean publicAlbum;
 
+
     public Album(String albumName, User user, boolean publicAlbum) {
         this.albumName = albumName;
         this.user = user;

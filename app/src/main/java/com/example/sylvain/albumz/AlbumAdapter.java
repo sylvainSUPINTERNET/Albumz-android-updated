@@ -38,7 +38,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
 
         View view = layoutInflater.inflate(R.layout.album_item,parent,false);
 
-        mDatabase = FirebaseDatabase.getInstance().getReference("albumz/public");
+        //mDatabase = FirebaseDatabase.getInstance().getReference("albumz/public");
         return new ViewHolder(view);
     }
 
