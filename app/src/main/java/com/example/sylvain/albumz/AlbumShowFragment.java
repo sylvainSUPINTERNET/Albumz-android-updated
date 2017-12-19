@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -68,7 +69,9 @@ public class AlbumShowFragment extends Fragment {
                                           for (DataSnapshot item : dataSnapshot.getChildren()) {
                                               if (item.getKey().equals(albumName)) {
                                                   Album album = dataSnapshot.getValue(Album.class);
-                                                  //view.findViewById(R.id.albumNameShow);
+                                                  TextView albumNameInput = view.findViewById(R.id.albumNameShow);
+
+                                                  albumNameInput.setText(albumName);
                                               }
 
                                           }
