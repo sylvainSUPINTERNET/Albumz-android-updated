@@ -2,7 +2,13 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/Albumz-android-updated.iml" filepath="$PROJECT_DIR$/Albumz-android-updated.iml" />
+=======
+      <module fileurl="file://D:\Android_studio(3.0)\WORKSAPCE_ANDROID_STUIDO3.0\Albumz-android\Albumz.iml" filepath="D:\Android_studio(3.0)\WORKSAPCE_ANDROID_STUIDO3.0\Albumz-android\Albumz.iml" />
+      <module fileurl="file://D:\Android_studio(3.0)\WORKSAPCE_ANDROID_STUIDO3.0\Albumz-android-master\Albumz-android.iml" filepath="D:\Android_studio(3.0)\WORKSAPCE_ANDROID_STUIDO3.0\Albumz-android-master\Albumz-android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Albumz-android-master.iml" filepath="$PROJECT_DIR$/Albumz-android-master.iml" />
+>>>>>>> parent of f7f98de... .
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
