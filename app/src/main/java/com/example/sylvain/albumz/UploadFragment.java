@@ -165,7 +165,7 @@ public class UploadFragment extends Fragment implements View.OnClickListener {
                                         //Log.d("PRIVATE FOUND", "found ! todo add picture node");
                                         //Log.d("key data",data.getKey().toString());
                                         albumFound = true;
-                                        refPrivate.child(data.getKey()).child("pictures").push().setValue(key + ".jpg"); //last key correspond to image name
+                                        refPrivate.child(data.getKey()).child("pictures").push().setValue(key + "jpg"); //last key correspond to image name
                                         albumName.setText(""); //refresh field name to avoid loop
                                     }
                                 }
